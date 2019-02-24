@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace server
 {
@@ -26,16 +28,23 @@ namespace server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddCors();
             services.AddHttpClient();
-            services.AddHttpClient("github", c =>
+            services.AddHttpClient("github", client =>
             {
-                c.BaseAddress = new Uri("https://api.github.com/");
-                c.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
-                c.DefaultRequestHeaders.Add("User-Agent", "HttpClientFactory-Sample");
+                client.BaseAddress = new Uri("https://api.github.com/");
+                client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
+                client.DefaultRequestHeaders.Add("User-Agent", "HttpClientFactory-Sample");
             });
-            services.AddHttpClient("test", c =>
+            services.AddHttpClient("myjson", client =>
             {
-                c.BaseAddress = new Uri("https://api.myjson.com/");
+                client.BaseAddress = new Uri("https://api.myjson.com/");
+            });
+            services.AddHttpClient("servicemanager", client =>
+            {
+                client.BaseAddress = new Uri("https://dcwim001.vicpolice.nonprod:13081/");
+                string Authentication = Convert.ToBase64String(Encoding.UTF8.GetBytes("username:password"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Authentication);
             });
         }
 
@@ -53,6 +62,7 @@ namespace server
             }
 
             //app.UseHttpsRedirection();
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseMvc();
         }
     }

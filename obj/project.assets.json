@@ -12078,11 +12078,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\- projects\\asp\\server\\server.csproj",
+      "projectUniqueName": "C:\\- projects\\asp\\dotnet_core_api\\server.csproj",
       "projectName": "server",
-      "projectPath": "C:\\- projects\\asp\\server\\server.csproj",
+      "projectPath": "C:\\- projects\\asp\\dotnet_core_api\\server.csproj",
       "packagesPath": "C:\\Users\\matthew.vanachteren\\.nuget\\packages\\",
-      "outputPath": "C:\\- projects\\asp\\server\\obj\\",
+      "outputPath": "C:\\- projects\\asp\\dotnet_core_api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

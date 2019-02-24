@@ -13,12 +13,12 @@ namespace server.Controllers
     {
         // GET api/values
     private readonly IHttpClientFactory _httpClientFactory;
-  
+
     public ValuesController(IHttpClientFactory httpClientFactory)
     {
         _httpClientFactory = httpClientFactory;
     }
-  
+    
     [HttpGet]
     public async Task<ActionResult> Get()
     {
